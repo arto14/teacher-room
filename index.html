@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head> 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+        <div class="container-fluid">
+        <div class="container">
+            <div class="main-container">
+                <!-- Navigation -->
+                <nav class="navbar navbar-expand-lg navbar-custom">
+                    <div class="container">
+                        <a class="navbar-brand" href="#">
+                            <i class="fas fa-school me-2"></i>SDN Kalisari 1
+                        </a>
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarNav">
+                            <ul class="navbar-nav ms-auto">
+                                <li class="nav-item">
+                                    <a class="nav-link active" href="#" data-section="dashboard">
+                                        <i class="fas fa-home me-1"></i>Dashboard
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#" data-section="attendance">
+                                        <i class="fas fa-clipboard-check me-1"></i>Absensi
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#" data-section="materials">
+                                        <i class="fas fa-book me-1"></i>Materi
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#" data-section="announcements">
+                                        <i class="fas fa-bullhorn me-1"></i>Informasi
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+
+                <!-- Dashboard Section -->
+                <div id="dashboard" class="content-section">
+                    <div class="hero-section">
+                        <div class="container">
+                            <h1 class="hero-title">Portal Guru Wali Kelas</h1>
+                            <p class="hero-subtitle">Mengelola kelas dengan mudah dan efisien</p>
+                            
+                            <!-- Teacher Profile Section -->
+                            <div class="row dashboard-row">
+                                <div class="col-md-4">
+                                    <div class="profile-card">
+                                        <div class="profile-header">
+                                            <div class="profile-avatar">
+                                                <i class="fas fa-user-circle"></i>
+                                            </div>
+                                            <h3 class="profile-name"></h3>
+                                            <p class="profile-title"></p>
+                                        </div>
+                                        <div class="profile-info">
+                                            <div class="info-item">
+                                                <i class="fas fa-id-card"></i>
+                                                <span></span>
+                                            </div>
+                                            <div class="info-item">
+                                                <i class="fas fa-envelope"></i>
+                                                <span></span>
+                                            </div>
+                                            <div class="info-item">
+                                                <i class="fas fa-phone"></i>
+                                                <span></span>
+                                            </div>
+                                            <div class="info-item">
+                                                <i class="fas fa-book"></i>
+                                                <span></span>
+                                            </div>
+                                        </div>
+                                        <div class="profile-actions">
+                                            <button class="btn btn-outline-primary-custom btn-custom" onclick="editProfile()">
+                                                <i class="fas fa-edit me-1"></i>Edit Profil
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="stats-cards-group">
+                                        <div class="stats-card">
+                                            <div class="stats-number" id="totalStudents"></div>
+                                            <div class="stats-label">Total Siswa</div>
+                                        </div>
+                                        <div class="stats-card">
+                                            <div class="stats-number text-success" id="presentToday"></div>
+                                            <div class="stats-label">Hadir Hari Ini</div>
+                                        </div>
+                                        <div class="stats-card">
+                                            <div class="stats-number text-warning" id="totalMaterials"></div>
+                                            <div class="stats-label">Materi Tersedia</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="container tab-content-section">
+                        <div class="row">
+                            <div class="col-lg-4 col-md-6 mb-4">
+                                <div class="feature-card">
+                                    <div class="feature-icon icon-attendance">
+                                        <i class="fas fa-clipboard-check"></i>
+                                    </div>
+                                    <h4>Kelola Absensi</h4>
+                                    <p class="text-muted">Catat kehadiran siswa harian dengan mudah dan akurat. Pantau pola kehadiran setiap siswa.</p>
+                                    <button class="btn btn-primary-custom btn-custom" onclick="showSection('attendance')">
+                                        Buka Absensi
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 mb-4">
+                                <div class="feature-card">
+                                    <div class="feature-icon icon-materials">
+                                        <i class="fas fa-book"></i>
+                                    </div>
+                                    <h4>Materi Pembelajaran</h4>
+                                    <p class="text-muted">Akses dan kelola materi pembelajaran untuk semua mata pelajaran dengan terstruktur.</p>
+                                    <button class="btn btn-primary-custom btn-custom" onclick="showSection('materials')">
+                                        Lihat Materi
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 mb-4">
+                                <div class="feature-card">
+                                    <div class="feature-icon icon-info">
+                                        <i class="fas fa-bullhorn"></i>
+                                    </div>
+                                    <h4>Informasi Sekolah</h4>
+                                    <p class="text-muted">Dapatkan informasi terbaru dan pengumuman penting dari sekolah.</p>
+                                    <button class="btn btn-primary-custom btn-custom" onclick="showSection('announcements')">
+                                        Lihat Informasi
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Attendance Section -->
+                <div id="attendance" class="content-section" style="display: none;">
+                    <div class="container tab-content-section">
+                        <div class="row mb-4">
+                            <div class="col-md-6">
+                                <h2><i class="fas fa-clipboard-check me-2"></i>Kelola Absensi</h2>
+                                <p class="text-muted">Catat kehadiran siswa untuk hari ini</p>
+                            </div>
+                            <div class="col-md-6 text-end">
+                                <div class="d-flex justify-content-end align-items-center">
+                                    <button class="btn btn-outline-primary-custom btn-custom me-3" data-bs-toggle="modal" data-bs-target="#importStudentsModal">
+                                        <i class="fas fa-file-import me-1"></i>Import Data Siswa
+                                    </button>
+                                    <select class="form-control me-3" id="classSelector" style="max-width: 150px;">
+                                        <option value="">Pilih Kelas</option>
+                                        <option value="1">Kelas 1</option>
+                                        <option value="2">Kelas 2</option>
+                                        <option value="3">Kelas 3</option>
+                                        <option value="4">Kelas 4</option>
+                                        <option value="5">Kelas 5</option>
+                                        <option value="6">Kelas 6</option>
+                                    </select>
+                                    <span class="me-3"><strong>Tanggal:</strong> <span id="currentDate"></span></span>
+                                    <button class="btn btn-success-custom btn-custom" onclick="saveAttendance()">
+                                        <i class="fas fa-save me-1"></i>Simpan Absensi
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="custom-table">
+                            <div class="table-responsive">
+                                <table class="table table-hover mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Nama Siswa</th>
+                                            <th>NIS</th>
+                                            <th>Status Kehadiran</th>
+                                            <th>Keterangan</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="attendanceTableBody">
+                                        <!-- Data akan diisi dengan JavaScript -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Materials Section -->
+                <div id="materials" class="content-section" style="display: none;">
+                    <div class="container tab-content-section">
+                        <div class="row mb-4">
+                            <div class="col-md-6">
+                                <h2><i class="fas fa-book me-2"></i>Materi Pembelajaran</h2>
+                                <p class="text-muted">Kelola materi pembelajaran untuk semua mata pelajaran</p>
+                            </div>
+                            <div class="col-md-6 text-end">
+                                <button class="btn btn-primary-custom btn-custom" data-bs-toggle="modal" data-bs-target="#addMaterialModal">
+                                    <i class="fas fa-plus me-1"></i>Tambah Materi
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="row mb-4">
+                            <div class="col-md-4">
+                                <select class="form-control" id="subjectFilter">
+                                    <option value="">Semua Mata Pelajaran</option>
+                                    <option value="Matematika">Matematika</option>
+                                    <option value="Bahasa Indonesia">Bahasa Indonesia</option>
+                                    <option value="IPA">IPA</option>
+                                    <option value="IPS">IPS</option>
+                                    <option value="PKN">PKN</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <select class="form-control" id="classFilter">
+                                    <option value="">Semua Kelas</option>
+                                    <option value="1">Kelas 1</option>
+                                    <option value="2">Kelas 2</option>
+                                    <option value="3">Kelas 3</option>
+                                    <option value="4">Kelas 4</option>
+                                    <option value="5">Kelas 5</option>
+                                    <option value="6">Kelas 6</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control" placeholder="Cari materi..." id="materialSearch">
+                            </div>
+                        </div>
+
+                        <div id="materialsContainer">
+                            <!-- Materials akan diisi dengan JavaScript -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Announcements Section -->
+                <div id="announcements" class="content-section" style="display: none;">
+                    <div class="container tab-content-section">
+                        <div class="row mb-4">
+                            <div class="col-md-6">
+                                <h2><i class="fas fa-bullhorn me-2"></i>Informasi Sekolah</h2>
+                                <p class="text-muted">Informasi dan pengumuman terbaru dari sekolah</p>
+                            </div>
+                        </div>
+
+                        <div id="announcementsContainer">
+                            <!-- Announcements akan diisi dengan JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Material Modal -->
+    <div class="modal fade" id="addMaterialModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Tambah Materi Pembelajaran</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="addMaterialForm">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Mata Pelajaran</label>
+                                <select class="form-control" id="materialSubject" required>
+                                    <option value="">Pilih Mata Pelajaran</option>
+                                    <option value="Matematika">Matematika</option>
+                                    <option value="Bahasa Indonesia">Bahasa Indonesia</option>
+                                    <option value="IPA">IPA</option>
+                                    <option value="IPS">IPS</option>
+                                    <option value="PKN">PKN</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Kelas</label>
+                                <select class="form-control" id="materialClass" required>
+                                    <option value="">Pilih Kelas</option>
+                                    <option value="1">Kelas 1</option>
+                                    <option value="2">Kelas 2</option>
+                                    <option value="3">Kelas 3</option>
+                                    <option value="4">Kelas 4</option>
+                                    <option value="5">Kelas 5</option>
+                                    <option value="6">Kelas 6</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Judul Materi</label>
+                            <input type="text" class="form-control" id="materialTitle" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Deskripsi</label>
+                            <textarea class="form-control" id="materialDescription" rows="4" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Link/URL Materi</label>
+                            <input type="url" class="form-control" id="materialLink" placeholder="https://...">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button type="button" class="btn btn-primary-custom btn-custom" onclick="addMaterial()">Simpan Materi</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Material Modal -->
+    <div class="modal fade" id="editMaterialModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit Materi Pembelajaran</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editMaterialForm">
+                        <input type="hidden" id="editMaterialId">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Mata Pelajaran</label>
+                                <select class="form-control" id="editMaterialSubject" required>
+                                    <option value="">Pilih Mata Pelajaran</option>
+                                    <option value="Matematika">Matematika</option>
+                                    <option value="Bahasa Indonesia">Bahasa Indonesia</option>
+                                    <option value="IPA">IPA</option>
+                                    <option value="IPS">IPS</option>
+                                    <option value="PKN">PKN</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Kelas</label>
+                                <select class="form-control" id="editMaterialClass" required>
+                                    <option value="">Pilih Kelas</option>
+                                    <option value="1">Kelas 1</option>
+                                    <option value="2">Kelas 2</option>
+                                    <option value="3">Kelas 3</option>
+                                    <option value="4">Kelas 4</option>
+                                    <option value="5">Kelas 5</option>
+                                    <option value="6">Kelas 6</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Judul Materi</label>
+                            <input type="text" class="form-control" id="editMaterialTitle" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Deskripsi</label>
+                            <textarea class="form-control" id="editMaterialDescription" rows="4" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Link/URL Materi</label>
+                            <input type="url" class="form-control" id="editMaterialLink" placeholder="https://...">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button type="button" class="btn btn-primary-custom btn-custom" onclick="saveEditMaterial()">Simpan Perubahan</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Import Students Modal -->
+    <div class="modal fade" id="importStudentsModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Import Data Siswa</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-4">
+                        <h6 class="mb-3">Format Excel yang Diperlukan:</h6>
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>NIS</th>
+                                        <th>Nama Siswa</th>
+                                        <th>Kelas</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>001</td>
+                                        <td>Nama Siswa</td>
+                                        <td>1</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="mt-3">
+                            <a href="#" class="btn btn-outline-primary btn-sm" onclick="downloadTemplate()">
+                                <i class="fas fa-download me-1"></i>Download Template
+                            </a>
+                        </div>
+                    </div>
+                    <form id="importStudentsForm">
+                        <div class="mb-3">
+                            <label class="form-label">File Excel</label>
+                            <input type="file" class="form-control" id="studentFile" accept=".xlsx, .xls" required>
+                            <div class="form-text">Format file: .xlsx atau .xls</div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button type="button" class="btn btn-primary-custom btn-custom" onclick="importStudents()">
+                        <i class="fas fa-file-import me-1"></i>Import Data
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Profile Modal -->
+    <div class="modal fade" id="editProfileModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit Profil Guru</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editProfileForm">
+                        <div class="mb-3">
+                            <label class="form-label">Nama Lengkap</label>
+                            <input type="text" class="form-control" id="teacherName" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">NIP</label>
+                            <input type="text" class="form-control" id="teacherNIP" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Email</label>
+                            <input type="email" class="form-control" id="teacherEmail" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Nomor Telepon</label>
+                            <input type="tel" class="form-control" id="teacherPhone" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Mata Pelajaran</label>
+                            <select class="form-control" id="teacherSubject" required>
+                                <option value="Matematika">Matematika</option>
+                                <option value="Bahasa Indonesia">Bahasa Indonesia</option>
+                                <option value="IPA">IPA</option>
+                                <option value="IPS">IPS</option>
+                                <option value="PKN">PKN</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button type="button" class="btn btn-primary-custom btn-custom" onclick="saveProfile()">
+                        <i class="fas fa-save me-1"></i>Simpan Perubahan
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div class="modal fade" id="loginModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Login Guru</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="loginForm">
+                        <div class="mb-3">
+                            <label class="form-label">Email</label>
+                            <input type="email" class="form-control" id="loginEmail" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Password</label>
+                            <input type="password" class="form-control" id="loginPassword" required>
+                        </div>
+                        <div class="mb-3 text-end">
+                            <a href="#" onclick="showRegisterModal()">Belum punya akun? Daftar</a>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button type="button" class="btn btn-primary-custom btn-custom" onclick="loginGuru()">Login</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div class="modal fade" id="registerModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Registrasi Guru</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="registerForm">
+                        <div class="mb-3">
+                            <label class="form-label">Nama Lengkap</label>
+                            <input type="text" class="form-control" id="registerName" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Email</label>
+                            <input type="email" class="form-control" id="registerEmail" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Password</label>
+                            <input type="password" class="form-control" id="registerPassword" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Mata Pelajaran</label>
+                            <select class="form-control" id="registerSubject" required>
+                                <option value="">Pilih Mata Pelajaran</option>
+                                <option value="Matematika">Matematika</option>
+                                <option value="Bahasa Indonesia">Bahasa Indonesia</option>
+                                <option value="IPA">IPA</option>
+                                <option value="IPS">IPS</option>
+                                <option value="PKN">PKN</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button type="button" class="btn btn-primary-custom btn-custom" onclick="registerGuru()">Daftar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- SheetJS Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    
+    <script src="script.js"></script>
+
+</body>
+</html>
